@@ -88,8 +88,35 @@ ENV CXXFLAGS ${BUILD_FLAGS}
 ENV LIBS -l:magma.o -lrt
 ENV LDFLAGS -L"${OUT}" -g
 
+USER root:root
+# install AFL
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    lcov \
+    afl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+USER magma:magma
 
+# custom compile with gcov_afl flags
 RUN ${FUZZER}/instrument.sh
 
+ENV GCOV_DIR="/coverage"
+ENV SCRIPT_DIR="/scripts"
+ENV TEMP_DIR="/temp"
 
-ENTRYPOINT "${MAGMA}/run.sh"
+# SET GCOV ENVs
+ENV GCOV_PREFIX="$OUT/afl/"
+ENV GCOV_PREFIX_STRIP=4
+
+USER root:root
+RUN mkdir -p ${GCOV_DIR} && chown magma:magma ${GCOV_DIR}
+RUN mkdir -p ${SCRIPT_DIR} && chown magma:magma ${SCRIPT_DIR}
+RUN mkdir -p ${TEMP_DIR} && chown magma:magma ${TEMP_DIR}
+
+USER root:root
+RUN ${FUZZER}/instrument_gcov_only.sh
+USER magma:magma
+
+RUN ${FUZZER}/init.sh

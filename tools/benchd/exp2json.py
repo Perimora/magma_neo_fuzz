@@ -19,14 +19,14 @@ ddr = lambda: defaultdict(ddr)
 
 def parse_args():
     parser = argparse.ArgumentParser(description=(
-        "Collects data from the experiment workdir and outputs a summary as "
+        "Collects data from the experiment afl++_eval and outputs a summary as "
         "a JSON file."
     ))
     parser.add_argument("--workers",
         default=4,
         help="The number of concurrent processes to launch.")
-    parser.add_argument("workdir",
-        help="The path to the Captain tool output workdir.")
+    parser.add_argument("afl++_eval",
+        help="The path to the Captain tool output afl++_eval.")
     parser.add_argument("outfile",
         default="-",
         help="The file to which the output will be written, or - for stdout.")
@@ -61,8 +61,8 @@ def find_campaigns(workdir):
                 # `run` directories always have integer-only names
                 if not run.isdigit():
                     logging.warning((
-                        "Detected invalid workdir hierarchy! Make sure to point "
-                        "the script to the root of the original workdir."
+                        "Detected invalid afl++_eval hierarchy! Make sure to point "
+                        "the script to the root of the original afl++_eval."
                     ))
                 path = os.path.join(root, run)
                 yield path

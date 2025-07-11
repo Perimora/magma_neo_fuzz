@@ -26,8 +26,10 @@ export CXX="g++"
 
 # Build the AFL-only instrumented version
 (
-    export OUT="$OUT/afl"
+    export OUT="/coverage"
     export LDFLAGS="$LDFLAGS -L$OUT"
+
+    mkdir -p $OUT
 
     "$MAGMA/build.sh"
 

@@ -12,8 +12,8 @@ set -e
 
 #export CC="$FUZZER/repo/afl-clang-fast"
 #export CXX="$FUZZER/repo/afl-clang-fast++"
-export CC="gcc"
-export CXX="g++"
+export CC="afl-gcc"
+export CXX="afl-g++"
 
 #export AS="llvm-as"
 
@@ -31,9 +31,9 @@ export CXX="g++"
 
     "$MAGMA/build.sh"
 
-    export CXXFLAGS="$CXXFLAGS -fprofile-arcs -ftest-coverage"
-    export CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
-    export LDFLAGS="$LDFLAGS -fprofile-arcs -ftest-coverage"
+    export CXXFLAGS="$CXXFLAGS"
+    export CFLAGS="$CFLAGS"
+    export LDFLAGS="$LDFLAGS"
 
     "$TARGET/build.sh"
 )

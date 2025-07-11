@@ -77,4 +77,6 @@ fi
 
 echo "Campaign terminated at $(date '+%F %R')"
 
+bash
+
 kill $(jobs -p)

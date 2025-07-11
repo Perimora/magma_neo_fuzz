@@ -7,6 +7,8 @@ set -e
 # - env OUT: path to directory where artifacts are stored
 # - env SHARED: path to directory shared with host (to store results)
 ##
+echo "ENTERING BUILD SCRIPT"
+echo "SAVING ARTIFACTS TO $OUT"
 
 MAGMA_STORAGE="$SHARED/canaries.raw"
 
