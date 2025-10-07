@@ -46,4 +46,7 @@ echo "  WORKERS=$WORKERS"
 echo "  ENTRYPOINT=$ENTRYPOINT"
 
 FUZZER=$FUZZER TARGET=$TARGET PROGRAM=$PROGRAM SHARED=$SHARED POLL=$POLL TIMEOUT=$TIMEOUT WORKERS=$WORKERS\
-  ./magma/tools/captain/start.sh
+  ./submodules/magma_neo_fuzz/tools/captain/start.sh
+
+#FUZZER=$FUZZER TARGET=$TARGET PROGRAM=$PROGRAM SHARED=$SHARED POLL=$POLL TIMEOUT=$TIMEOUT WORKERS=$WORKERS\
+#  ./submodules/magma_neo_fuzz/tools/captain/start_ghcr.sh
